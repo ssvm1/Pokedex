@@ -1,25 +1,24 @@
-function NavBar({setPokemonIndex, pokemonIndex, pokemonList}) {
+function NavBar({ setPokemonIndex, pokemonList }) {
+  const onClick = (index, name) => {
+    setPokemonIndex(index);
+    if (name.toLowerCase() === 'pikachu') {
+      alert("pika pikachu !!!");
+    }
+  };
 
-
-const handleClickNext = () => {
-  console.log("Next click")
-  setPokemonIndex( pokemonIndex + 1)
-}
-const handleClickPrevious = () => {
-  console.log("Previous click")
-  setPokemonIndex( pokemonIndex - 1)
-}
-
-return (
+  return (
     <>
-{pokemonIndex > 0 && (
-    <button onClick={handleClickPrevious}>Précédent</button>
-  )}
-  {pokemonIndex < pokemonList.length - 1 && (
-    <button onClick={handleClickNext}>Suivant</button>
-  )}
-  </>
-)
+      <ul>
+        {pokemonList.map((pokemon, PokemonListIndex) => (
+          <li key={PokemonListIndex}>
+            <button onClick={() => onClick(PokemonListIndex, pokemon.name)}>
+              {pokemon.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 export default NavBar;

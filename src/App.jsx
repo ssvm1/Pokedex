@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import PokemonCard from "./components/PokemonCard"
 import PropTypes, { array } from 'prop-types';
+import NavBar from "./components/NavBar";
+import React, { useEffect} from 'react';
+
 
 
 const pokemonList = [
@@ -41,26 +44,21 @@ PokemonCard.propTypes = {
 }
 
 function App() {
+
+  useEffect(
+    () => {
+      alert("hello pokemon trainer :)");
+    },
+    []
+  )
+  
   const [pokemonIndex, setPokemonIndex] = useState(0)
-
-  const handleClickNext = () => {
-    console.log("Next click")
-    setPokemonIndex( pokemonIndex + 1)
-  }
-  const handleClickPrevious = () => {
-    console.log("Previous click")
-    setPokemonIndex( pokemonIndex - 1)
-  }
-
+  
   return (
+    
     <div>
       <PokemonCard pokemon={pokemonList[pokemonIndex]}/>
-      {pokemonIndex > 0 && (
-        <button onClick={handleClickPrevious}>Précédent</button>
-      )}
-      {pokemonIndex < pokemonList.length - 1 && (
-        <button onClick={handleClickNext}>Suivant</button>
-      )}
+      <NavBar setPokemonIndex={setPokemonIndex} pokemonList={pokemonList}/>
     </div>
   );
 }
